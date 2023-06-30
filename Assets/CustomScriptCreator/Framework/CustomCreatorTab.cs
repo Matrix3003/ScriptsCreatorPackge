@@ -1,29 +1,59 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Collections.Generic; 
 
 namespace CustomScriptsCreator
 {
     #if UNITY_EDITOR
-    public class CustomCreatorTab : EditorWindow
+    internal class CustomCreatorTab : EditorWindow
     {
         private static string _defaultClassName = "NewClass";
         public static bool CreateFile;
 
+        private static readonly List<char> _invalidCharacters = new List<char>() {
+            ' ',
+            'ç',
+            '#',
+            '%',
+            '&',
+            '{',
+            '}',
+            '/',
+            '<',
+            '>',
+            '*',
+            '?',
+            '$',
+            '!',
+            '"',
+            ':',
+            '@',
+            '+',
+            '=',
+            '|',
+            ';'
+        }; 
+
+        private static readonly char _correctionChar = '_'; 
+
         
-        [MenuItem("Assets/Create/CustomScript/C# Empty Class", priority = 452)]
+        [MenuItem("Assets/Create/CustomScript/C# Empty Class", priority = 752)]
         static void CreateCSharpEmptyClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
+
             if (!string.IsNullOrEmpty(filePath))
             {
                 string className = ShowFileNameDialog(_defaultClassName);
+
+                className = ValidadeClassChars(className);
+
                 if (!string.IsNullOrEmpty(className) && CreateFile)
                 {
                     string fileName = className + ".cs";
                     string fullPath = Path.Combine(filePath, fileName);
                     File.WriteAllText(fullPath, CSharpFileContents.GetEmpyClassFileContent(className));
-                    Debug.Log("Created C# empty class file at: " + fullPath);
 
                     AssetDatabase.ImportAsset(fullPath, ImportAssetOptions.Default);
                     AssetDatabase.Refresh();
@@ -31,19 +61,22 @@ namespace CustomScriptsCreator
             }
         }
 
-        [MenuItem("Assets/Create/CustomScript/C# MonoBehaviour Class", priority = 452)]
+        [MenuItem("Assets/Create/CustomScript/C# MonoBehaviour Class", priority = 752)]
         static void CreateCSharpMonoClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
+
             if (!string.IsNullOrEmpty(filePath))
             {
                 string className = ShowFileNameDialog(_defaultClassName);
+
+                className = ValidadeClassChars(className); 
+
                 if (!string.IsNullOrEmpty(className) && CreateFile)
                 {
                     string fileName = className + ".cs";
                     string fullPath = Path.Combine(filePath, fileName);
                     File.WriteAllText(fullPath, CSharpFileContents.GetMonoClassFileContent(className));
-                    Debug.Log("Created C# MonoBehaviour class file at: " + fullPath);
 
                     AssetDatabase.ImportAsset(fullPath, ImportAssetOptions.Default);
                     AssetDatabase.Refresh();
@@ -51,19 +84,22 @@ namespace CustomScriptsCreator
             }
         }
 
-        [MenuItem("Assets/Create/CustomScript/C# Interface Class", priority = 453)]
+        [MenuItem("Assets/Create/CustomScript/C# Interface Class", priority = 753)]
         static void CreateCSharpInterfaceClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
+
             if (!string.IsNullOrEmpty(filePath))
             {
                 string className = ShowFileNameDialog(_defaultClassName);
+
+                className = ValidadeClassChars(className);
+
                 if (!string.IsNullOrEmpty(className) && CreateFile)
                 {
                     string fileName = className + ".cs";
                     string fullPath = Path.Combine(filePath, fileName);
                     File.WriteAllText(fullPath, CSharpFileContents.GetInterfaceFileContent((className)));
-                    Debug.Log("Created C# interface class file at: " + fullPath);
 
                     AssetDatabase.ImportAsset(fullPath, ImportAssetOptions.Default);
                     AssetDatabase.Refresh();
@@ -101,6 +137,23 @@ namespace CustomScriptsCreator
 
             return dialog.className;
         }
+
+        private static string ValidadeClassChars(string className)
+        {
+            char[] classChars = className.ToCharArray(); 
+
+            for (int i = 0; i < classChars.Length; i++)
+            {
+                if(_invalidCharacters.Contains(classChars[i]))
+                {
+                    classChars[i] = _correctionChar; 
+                }
+            }
+
+            string corretedName = new string(classChars); 
+            
+            return corretedName;  
+        }
     }
 
     public class CreateFileDialog : EditorWindow
@@ -125,6 +178,12 @@ namespace CustomScriptsCreator
 
             if (GUILayout.Button("Cancel"))
             {
+                Close();
+            }
+
+            if (Event.current.keyCode == KeyCode.Return)
+            {
+                CustomCreatorTab.CreateFile = true; 
                 Close();
             }
 
