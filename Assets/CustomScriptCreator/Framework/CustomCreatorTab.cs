@@ -5,13 +5,13 @@ using System.IO;
 namespace CustomScriptsCreator
 {
     #if UNITY_EDITOR
-    public class CustomCreatorTab : EditorWindow
+    internal class CustomCreatorTab : EditorWindow
     {
         private static string _defaultClassName = "NewClass";
         public static bool CreateFile;
 
         
-        [MenuItem("Assets/Create/CustomScript/C# Empty Class", priority = 452)]
+        [MenuItem("Assets/Create/CustomScript/C# Empty Class", priority = 752)]
         static void CreateCSharpEmptyClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
@@ -31,7 +31,7 @@ namespace CustomScriptsCreator
             }
         }
 
-        [MenuItem("Assets/Create/CustomScript/C# MonoBehaviour Class", priority = 452)]
+        [MenuItem("Assets/Create/CustomScript/C# MonoBehaviour Class", priority = 752)]
         static void CreateCSharpMonoClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
@@ -51,7 +51,7 @@ namespace CustomScriptsCreator
             }
         }
 
-        [MenuItem("Assets/Create/CustomScript/C# Interface Class", priority = 453)]
+        [MenuItem("Assets/Create/CustomScript/C# Interface Class", priority = 753)]
         static void CreateCSharpInterfaceClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
