@@ -20,15 +20,14 @@ namespace CustomScriptsCreator
         };
 
         private static readonly char _correctionChar = '_'; 
-
         
         #region summary
         /// <summary>
-        /// Create a empy c# class with a default namespace in the user selected folded
+        /// Create an empty c# class with a default namespace in the user selected folder.
         /// </summary>
         /// <param name="menuCommand"></param>
         #endregion
-        [MenuItem("Assets/Create/CustomScript/C# Empty Class", priority = 752)]
+        [MenuItem("Assets/Create/CustomScript/C# Empty Class", priority = 50)]
         static void CreateCSharpEmptyClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
@@ -53,11 +52,11 @@ namespace CustomScriptsCreator
         
         #region summary
         /// <summary>
-        /// Create a Mono c# class with a default namespace in the user selected folded
+        /// Create a Mono c# class with a default namespace in the user selected folder.
         /// </summary>
         /// <param name="menuCommand"></param>
         #endregion
-        [MenuItem("Assets/Create/CustomScript/C# MonoBehaviour Class", priority = 752)]
+        [MenuItem("Assets/Create/CustomScript/C# MonoBehaviour Class", priority = 50)]
         static void CreateCSharpMonoClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
@@ -82,11 +81,11 @@ namespace CustomScriptsCreator
 
         #region summary
         /// <summary>
-        /// Create a c# interfave with a default namespace in the user selected folded
+        /// Create a c# interface with a default namespace in the user selected folder.
         /// </summary>
         /// <param name="menuCommand"></param>
         #endregion
-        [MenuItem("Assets/Create/CustomScript/C# Interface Class", priority = 753)]
+        [MenuItem("Assets/Create/CustomScript/C# Interface Class", priority = 50)]
         static void CreateCSharpInterfaceClassFile(MenuCommand menuCommand)
         {
             string filePath = GetSelectedFolderPath();
@@ -110,7 +109,7 @@ namespace CustomScriptsCreator
         }
 
         
-        #region Summary
+        #region summary
         /// <summary>
         /// Helper method to get the selected folder path
         /// </summary>
@@ -131,7 +130,7 @@ namespace CustomScriptsCreator
             return folderPath;
         }
 
-        #region Summary
+        #region summary
         /// <summary>
         /// Helper method to display a dialog for entering the file name
         /// </summary>
@@ -152,7 +151,7 @@ namespace CustomScriptsCreator
             return dialog.className;
         }
 
-        #region Summary
+        #region summary
         /// <summary>
         /// Checks if there are any invalid characters to write c# files, if hover it changes them to an underscore
         /// </summary>

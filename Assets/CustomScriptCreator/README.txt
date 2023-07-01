@@ -1,15 +1,18 @@
 Package Creator: Nicolas Pegolo dos Anjos
 
 
-Package created for make c# class creations more fast and easy, the framework creates a tab in the editor for 
-creating different types of c# scripts, and already adds name space to them automatically.
-
-The options for create the custom is scripts is on: Assets/Create/CustomScriptsCreator
+Package created to make c# class creations more fast and easy, the framework creates a tab in the editor for 
+creating different types of c# scripts and already adding namespaces to them automatically.
 
 
-The files in the framework is:
+The options for creating the custom is scripts are:  Assets/Create/CustomScripts
 
-CustomCreatorTab: Framwork's main class, responsible for generating the editor's visual tabs and creating the 
+You can change the editor Create tab priority in CustomCreatorTab on the [MenuItem("path", priority = value)] in Create funcs.
+
+
+The files in the framework are: 
+
+CustomCreatorTab: The framework's main class, responsible for generating the editor's visual tabs and creating the 
 files in the right folders.
 
 CSharpFileContents: Class responsible for generating syntax for c# files
