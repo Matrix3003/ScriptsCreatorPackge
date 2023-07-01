@@ -7,7 +7,7 @@ creating different types of c# scripts and already adding namespaces to them aut
 
 The options for creating the custom is scripts are:  Assets/Create/CustomScripts
 
-You can change the editor Create tab priority in CustomCreatorTab on the [MenuItem("path", priority = value)] in Create funcs.
+You can change the editor Create tab priority in CustomCreatorTab on the [MenuItem("path", priority = value)] in lines 30, 59 and 88. 
 
 
 The files in the framework are: 
@@ -19,7 +19,9 @@ CSharpFileContents: Class responsible for generating syntax for c# files
 
 FrameworkHelp: Class responsible for generating the help tabs in the editor
 
-If you have any queries, please contact: nicolaspegolo@hotmail.com
+
+If you have any doubts, you can read the "Custom Script Creator Guide.pdf" in the archives.
+Or if you want to contact me use: nicolaspegolo@hotmail.com
 
 
-Thank you, and good production!
+Thank you, and good production! 
