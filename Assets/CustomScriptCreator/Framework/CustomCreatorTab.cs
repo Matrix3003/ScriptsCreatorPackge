@@ -11,33 +11,23 @@ namespace CustomScriptsCreator
         private static string _defaultClassName = "NewClass";
         public static bool CreateFile;
 
-        private static readonly List<char> _invalidCharacters = new List<char>() {
-            ' ',
-            'ç',
-            '#',
-            '%',
-            '&',
-            '{',
-            '}',
-            '/',
-            '<',
-            '>',
-            '*',
-            '?',
-            '$',
-            '!',
-            '"',
-            ':',
-            '@',
-            '+',
-            '=',
-            '|',
-            ';'
-        }; 
+        private static readonly List<char> _invalidCharacters = new List<char>() 
+        {
+            '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '[', ']',
+            '{', '}', '|', '\\', ':', ';', '\'', '"', '<', '>', ',', '.', '/', '?', ' ',
+            'á', 'à', 'ã', 'â', 'ä', 'é', 'è', 'ẽ', 'ê', 'ë', 'í', 'ì', 'ĩ', 'î', 'ï',
+            'ó', 'ò', 'õ', 'ô', 'ö', 'ú', 'ù', 'ũ', 'û', 'ü', 'ç'
+        };
 
         private static readonly char _correctionChar = '_'; 
 
         
+        #region summary
+        /// <summary>
+        /// Create a empy c# class with a default namespace in the user selected folded
+        /// </summary>
+        /// <param name="menuCommand"></param>
+        #endregion
         [MenuItem("Assets/Create/CustomScript/C# Empty Class", priority = 752)]
         static void CreateCSharpEmptyClassFile(MenuCommand menuCommand)
         {
@@ -47,7 +37,7 @@ namespace CustomScriptsCreator
             {
                 string className = ShowFileNameDialog(_defaultClassName);
 
-                className = ValidadeClassChars(className);
+                className = ValidadeChars(className);
 
                 if (!string.IsNullOrEmpty(className) && CreateFile)
                 {
@@ -60,7 +50,13 @@ namespace CustomScriptsCreator
                 }
             }
         }
-
+        
+        #region summary
+        /// <summary>
+        /// Create a Mono c# class with a default namespace in the user selected folded
+        /// </summary>
+        /// <param name="menuCommand"></param>
+        #endregion
         [MenuItem("Assets/Create/CustomScript/C# MonoBehaviour Class", priority = 752)]
         static void CreateCSharpMonoClassFile(MenuCommand menuCommand)
         {
@@ -70,7 +66,7 @@ namespace CustomScriptsCreator
             {
                 string className = ShowFileNameDialog(_defaultClassName);
 
-                className = ValidadeClassChars(className); 
+                className = ValidadeChars(className); 
 
                 if (!string.IsNullOrEmpty(className) && CreateFile)
                 {
@@ -84,6 +80,12 @@ namespace CustomScriptsCreator
             }
         }
 
+        #region summary
+        /// <summary>
+        /// Create a c# interfave with a default namespace in the user selected folded
+        /// </summary>
+        /// <param name="menuCommand"></param>
+        #endregion
         [MenuItem("Assets/Create/CustomScript/C# Interface Class", priority = 753)]
         static void CreateCSharpInterfaceClassFile(MenuCommand menuCommand)
         {
@@ -93,7 +95,7 @@ namespace CustomScriptsCreator
             {
                 string className = ShowFileNameDialog(_defaultClassName);
 
-                className = ValidadeClassChars(className);
+                className = ValidadeChars(className);
 
                 if (!string.IsNullOrEmpty(className) && CreateFile)
                 {
@@ -107,7 +109,13 @@ namespace CustomScriptsCreator
             }
         }
 
-        // Helper method to get the selected folder path
+        
+        #region Summary
+        /// <summary>
+        /// Helper method to get the selected folder path
+        /// </summary>
+        /// <returns></returns>
+        #endregion
         private static string GetSelectedFolderPath()
         {
             string folderPath = string.Empty;
@@ -123,7 +131,13 @@ namespace CustomScriptsCreator
             return folderPath;
         }
 
-        // Helper method to display a dialog for entering the file name
+        #region Summary
+        /// <summary>
+        /// Helper method to display a dialog for entering the file name
+        /// </summary>
+        /// <param name="defaultName"></param>
+        /// <returns></returns>
+        #endregion
         private static string ShowFileNameDialog(string defaultName)
         {
             CreateFile = false; 
@@ -138,7 +152,18 @@ namespace CustomScriptsCreator
             return dialog.className;
         }
 
-        private static string ValidadeClassChars(string className)
+        #region Summary
+        /// <summary>
+        /// Checks if there are any invalid characters to write c# files, if hover it changes them to an underscore
+        /// </summary>
+        /// <param name="className">
+        /// The string if will be validated
+        /// </param>
+        /// <returns>
+        /// The new string with also valid chars
+        /// </returns>
+        #endregion
+        private static string ValidadeChars(string className)
         {
             char[] classChars = className.ToCharArray(); 
 
@@ -156,6 +181,7 @@ namespace CustomScriptsCreator
         }
     }
 
+    // Confirmation window manager
     public class CreateFileDialog : EditorWindow
     {
         public string className = "";
