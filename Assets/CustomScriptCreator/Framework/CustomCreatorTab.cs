@@ -108,6 +108,35 @@ namespace CustomScriptsCreator
             }
         }
 
+        #region summary
+        /// <summary>
+        /// Create a c# class with a default namespace and singleton sitaxe in the user selected folder.
+        /// </summary>
+        /// <param name="menuCommand"></param>
+        #endregion
+        [MenuItem("Assets/Create/CustomScript/C# Singleton Class", priority = 50)]
+        static void CreateCSharpSigletonClassFile(MenuCommand menuCommand)
+        {
+            string filePath = GetSelectedFolderPath();
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                string className = ShowFileNameDialog(_defaultClassName);
+
+                className = ValidadeChars(className);
+
+                if (!string.IsNullOrEmpty(className) && CreateFile)
+                {
+                    string fileName = className + ".cs";
+                    string fullPath = Path.Combine(filePath, fileName);
+                    File.WriteAllText(fullPath, CSharpFileContents.GetSingletonClassFileContent((className)));
+
+                    AssetDatabase.ImportAsset(fullPath, ImportAssetOptions.Default);
+                    AssetDatabase.Refresh();
+                }
+            }
+        }
+
         
         #region summary
         /// <summary>

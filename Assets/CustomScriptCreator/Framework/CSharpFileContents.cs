@@ -87,5 +87,44 @@ namespace CustomScriptsCreator
 
             return content; 
         } 
+
+        #region Summary
+        /// <summary>
+        /// Generate a singleton c# class sintax 
+        /// </summary>
+        /// <param name="className"></param>
+        /// <returns>
+        /// Empy mono c# class sintax 
+        /// </returns>
+        #endregion
+        public static string GetSingletonClassFileContent(string className)
+        {   
+            string header = $"using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\n"; 
+
+            string body = string.Concat($"namespace {DEFAULT_NAMESPACE_NAME}\n",
+                                        "{\n",
+                                        $"    public class {className} : MonoBehaviour\n",
+                                        "    {\n",
+                                        $"        public static {className} Instance;\n",
+                                        "         \n",
+                                        "        private void Awake()\n",
+                                        "        {\n",
+                                        "            if(Instance == null)\n",
+                                        "            {\n",
+                                        "                Instance = this;\n",
+                                        "                return;\n",
+                                        "            }\n",
+                                        "            \n",
+                                        $"            Debug.LogError(\"More than one Sigleton in scene, Singleton: -> {className} <-\");\n",
+                                        "        }\n",
+                                        "    }\n",
+                                        "}"
+
+            );
+            
+            string content = string.Concat(FILES_HEADER, body); 
+
+            return content; 
+        } 
     }
 }
